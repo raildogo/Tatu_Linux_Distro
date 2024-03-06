@@ -8,6 +8,7 @@ mkdir -pv $LFS/{dev,proc,sys,run}
 bash -e $DIST_ROOT/build/build_scripts/mount-virt.sh
 
 if ! test -f $LFS/etc/passwd ; then
+
 cat > $LFS/etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/usr/bin/false

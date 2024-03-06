@@ -18,11 +18,7 @@ install -dv -m 0750 /root
 install -dv -m 1777 /tmp /var/tmp
 
 ln -sv /proc/self/mounts /etc/mtab
-
-cat > /etc/hosts << EOF
-127.0.0.1  localhost $(hostname)
-::1        localhost
-EOF
+echo "127.0.0.1  localhost tatu" > /etc/hosts
 
 touch /var/log/{btmp,lastlog,faillog,wtmp}
 chgrp -v utmp /var/log/lastlog
@@ -43,8 +39,7 @@ bash -e build_scripts/chr-util-linux.sh util-linux-2.39.3.tar.xz
 
 echo "Copilacao Chroot Finalizado!"
 
-rm -rf /usr/share/{info,man,doc}/*
 find /usr/{lib,libexec} -name \*.la -delete
-
+rm -rf /usr/share/{info,man,doc}/*
 
 exit

@@ -1,5 +1,5 @@
 echo
-echo "GCC Pass 1"
+echo "GCC Passo 1"
 echo
 sleep 1
 
@@ -43,12 +43,12 @@ cd       build
     --disable-libstdcxx       \
     --enable-languages=c,c++
 
-make
-make install
+make && make install
 
 cd ..
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
   `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/include/limits.h
 
 cd $LFS/sources
+
 rm -rf gcc-13.2.0

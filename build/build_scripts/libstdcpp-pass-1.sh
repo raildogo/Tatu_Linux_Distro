@@ -15,6 +15,6 @@ cd       build
 
 make && make DESTDIR=$LFS install
 
-#rm -v $LFS/usr/lib/lib{stdc++{,exp,fs},supc++}.la
+rm -v $LFS/usr/lib/lib{stdc++{,exp,fs},supc++}.la
 
 . $DIST_ROOT/build/build_scripts/inc-end.sh $1 $(basename $0)
