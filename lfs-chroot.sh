@@ -11,19 +11,19 @@ begin() {
 	package_name=$1
 	package_ext=$2
 
-	echo "[lfs-chroot] Starting build of $package_name at $(date)"
+	echo "[lfs-chroot] Iniciando a construção de $package_name em $(date)"
 
 	tar xf $package_name.$package_ext
 	cd $package_name
 }
-
+sleep 2
 finish() {
-	echo "[lfs-chroot] Finishing build of $package_name at $(date)"
+	echo "[lfs-chroot] Finalizando a construção de $package_name em $(date)"
 
 	cd /sources
 	rm -rf $package_name
 }
-
+sleep 2
 cd /sources
 
 # 7.7. Gettext-0.22.4

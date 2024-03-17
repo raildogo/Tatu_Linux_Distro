@@ -11,19 +11,19 @@ begin() {
 	package_name=$1
 	package_ext=$2
 
-	echo "[lfs-final] Starting build of $package_name at $(date)"
+	echo "[lfs-final] Iniciando a construção de $package_name em $(date)"
 
 	tar xf $package_name.$package_ext
 	cd $package_name
 }
-
+sleep 2
 finish() {
-	echo "[lfs-final] Finishing build of $package_name at $(date)"
+	echo "[lfs-final] Finalizando a construção de $package_name em $(date)"
 
 	cd /sources
 	rm -rf $package_name
 }
-
+sleep 2
 cd /sources
 
 # 9.2. LFS-Bootscripts-20230728
@@ -115,15 +115,32 @@ CLOCKPARAMS=
 
 # End /etc/sysconfig/clock
 EOF
+# 9.6.5. Configuring the Linux Console 
+cat > /etc/sysconfig/console << "EOF"
+# Begin /etc/sysconfig/console
+
+UNICODE="1"
+FONT="Lat2-Terminus16"
+
+# End /etc/sysconfig/console
+EOF
 
 # 9.7. The Bash Shell Startup Files
 cat > /etc/profile << "EOF"
 # Begin /etc/profile
+for i in $(locale); do
+  unset ${i%=*}
+done
 
+if [[ "$TERM" = linux ]]; then
+  export LANG=C.UTF-8
+else
 export LANG=en_US.UTF-8
-
+fi
 # End /etc/profile
 EOF
+
+SYSKLOGD_PARMS=
 
 # 9.8. Creating the /etc/inputrc File
 cat > /etc/inputrc << "EOF"
@@ -133,7 +150,7 @@ cat > /etc/inputrc << "EOF"
 # Allow the command prompt to wrap to the next line
 set horizontal-scroll-mode Off
 
-# Enable 8bit input
+# Enable 8-bit input
 set meta-flag On
 set input-meta On
 
@@ -184,76 +201,20 @@ EOF
 cat > /etc/fstab << "EOF"
 # Begin /etc/fstab
 
-# file system  mount-point  type     options             dump  fsck
-#                                                              order
+# file system  mount-point    type     options             dump  fsck
+#                                                                order
 
-/dev/sda3      /            ext4     defaults            1     1
+/dev/sda3      /              ext4     defaults            1     1
 /dev/sda2     swap           swap     pri=1               0     0
-proc           /proc        proc     nosuid,noexec,nodev 0     0
-sysfs          /sys         sysfs    nosuid,noexec,nodev 0     0
-devpts         /dev/pts     devpts   gid=5,mode=620      0     0
-tmpfs          /run         tmpfs    defaults            0     0
-devtmpfs       /dev         devtmpfs mode=0755,nosuid    0     0
+proc           /proc          proc     nosuid,noexec,nodev 0     0
+sysfs          /sys           sysfs    nosuid,noexec,nodev 0     0
+devpts         /dev/pts       devpts   gid=5,mode=620      0     0
+tmpfs          /run           tmpfs    defaults            0     0
+devtmpfs       /dev           devtmpfs mode=0755,nosuid    0     0
+tmpfs          /dev/shm       tmpfs    nosuid,nodev        0     0
+cgroup2        /sys/fs/cgroup cgroup2  nosuid,noexec,nodev 0     0
 
 # End /etc/fstab
-EOF
-
-cd /sources
-
-# 10.3. Linux-6.7.4
-begin linux-6.7.4 tar.xz
-make mrproper
-make defconfig
-make
-make modules_install
-cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.7.4-lfs-12.1
-cp -iv System.map /boot/System.map-6.7.4
-cp -iv .config /boot/config-6.7.4
-install -d /usr/share/doc/linux-6.7.4
-cp -r Documentation/* /usr/share/doc/linux-6.7.4
-finish
-
-# 10.3.2. Configuring Linux Module Load Order
-install -v -m755 -d /etc/modprobe.d
-cat > /etc/modprobe.d/usb.conf << "EOF"
-# Begin /etc/modprobe.d/usb.conf
-
-install ohci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i ohci_hcd ; true
-install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
-
-# End /etc/modprobe.d/usb.conf
-EOF
-
-# 10.4. Using GRUB to Set Up the Boot Process
-grub-install /dev/sdb
-cat > /boot/grub/grub.cfg << "EOF"
-# Begin /boot/grub/grub.cfg
-set default=0
-set timeout=5
-
-insmod ext2
-set root=(hd0,3)
-
-menuentry "GNU/Linux, Linux 6.7.4-lfs-12.1" {
-        linux   /boot/vmlinuz-6.7.4-lfs-12.1 root=/dev/sda3 ro
-}
-EOF
-
-# 11.1. The End
-echo 12.1 > /etc/lfs-release
-cat > /etc/lsb-release << "EOF"
-DISTRIB_ID="Linux From Scratch"
-DISTRIB_RELEASE="12.1"
-DISTRIB_CODENAME="<your name here>"
-DISTRIB_DESCRIPTION="Linux From Scratch"
-EOF
-cat > /etc/os-release << "EOF"
-NAME="Linux From Scratch"
-VERSION="12.1"
-ID=lfs
-PRETTY_NAME="Linux From Scratch 12.1"
-VERSION_CODENAME="<your name here>"
-HOME_URL="https://www.linuxfromscratch.org/lfs/"
 EOF
 
 echo "[lfs-final] e isso é tudo pessoal"

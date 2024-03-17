@@ -11,19 +11,19 @@ begin() {
 	package_name=$1
 	package_ext=$2
 
-	echo "[lfs-cross] Starting build of $package_name at $(date)"
+	echo "[lfs-cross] Iniciando a construção de $package_name em $(date)"
 
 	tar xf $package_name.$package_ext
 	cd $package_name
 }
-
+sleep 2
 finish() {
-	echo "[lfs-cross] Finishing build of $package_name at $(date)"
+	echo "[lfs-cross] Finalizando a construção de $package_name em $(date)"
 
 	cd $LFS/sources
 	rm -rf $package_name
 }
-
+sleep 2
 cd $LFS/sources
 
 # 5.2. Binutils-2.42 - Pass 1
