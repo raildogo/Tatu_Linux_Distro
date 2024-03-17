@@ -12,18 +12,19 @@ begin() {
 	package_ext=$2
 
 	echo "[lfs-system] Iniciando a construção de $package_name em $(date)"
+sleep 2
 
 	tar xf $package_name.$package_ext
 	cd $package_name
 }
-sleep 2
+
 finish() {
 	echo "[lfs-system] Finalizando a construção de $package_name em $(date)"
+sleep 2
 
 	cd /sources
 	rm -rf $package_name
 }
-sleep 2
 cd /sources
 
 # 8.3. Man-pages-6.06
