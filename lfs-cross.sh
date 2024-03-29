@@ -89,7 +89,7 @@ cd ..
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
   `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/include/limits.h
 finish
-echo "Acabei mais"
+echo "Acabei mais um"
 
 # 5.4. Linux-6.7.4 API Headers
 echo "Iniciando"

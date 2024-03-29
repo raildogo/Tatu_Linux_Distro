@@ -3,8 +3,8 @@ echo "Dist Root: ${DIST_ROOT:?}"
 echo "LFS: ${LFS:?}"
 
 
-if ! test $(whoami) == "distbuild" ; then
-   echo "Deve ser execultado como distbuild!"
+if ! test $(whoami) == "tatubuild" ; then
+   echo "Deve ser execultado como tatubuild!"
    exit -1
 fi
 

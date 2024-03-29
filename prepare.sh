@@ -3,7 +3,7 @@ echo "LFS: ${LFS:?}"
 
 mkdir -p $LFS/sources
 
-for f in $(cat $DIST_ROOT/build/build_list)
+for f in $(cat $DIST_ROOT/build_list)
 do
     bn=$(basename $f)
 
@@ -12,16 +12,16 @@ do
     fi 
 done;
 
-mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin,lib64,tools}
+mkdir -pv $LFS/{etc,var,lib64,tools} $LFS/usr/{bin,lib,sbin}
 
-if ! test $(id -u distbuild) ; then
+if ! test $(id -u tatubuild) ; then
 
-groupadd distbuild
-useradd -s /bin/bash -g distbuild -m -k /dev/null distbuild
-passwd distbuild
-chown -v distbuild $LFS/{usr{,/*},lib,var,etc,bin,sbin,tools,lib64,sources}
+groupadd tatubuild
+useradd -s /bin/bash -g tatutbuild -m -k /dev/null tatubuild
+passwd tatubuild
+chown -v tatubuild $LFS/{usr{,/*},lib,var,etc,bin,sbin,tools,lib64,sources}
 
-dbhome=$(eval echo "~distbuild")
+dbhome=$(eval echo "~tatubuild")
 
 cat > $dbhome/.bash_profile << "EOF"
 exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
