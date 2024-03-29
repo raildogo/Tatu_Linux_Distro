@@ -6,6 +6,7 @@ cd binutils-2.42
 mkdir -v build
 cd       build
 
+time {
 ../configure --prefix=$LFS/tools \
              --with-sysroot=$LFS \
              --target=$LFS_TGT   \
@@ -14,7 +15,7 @@ cd       build
              --disable-werror    \
              --enable-default-hash-style=gnu
 
-make && make install
+make && make install; }
 
 cd $LFS/sources
 
