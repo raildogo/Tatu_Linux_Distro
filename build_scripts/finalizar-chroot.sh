@@ -27,7 +27,7 @@ chmod -v 600  /var/log/btmp
 
 #Iniciando copilacao de outros pacotes!
 export $DIST_ROOT=/dist
-cd $DIST_ROOT/build
+cd $DIST_ROOT/
 
 bash -e build_scripts/chr-gettext.sh gettext-0.22.4.tar.xz
 bash -e build_scripts/chr-bison.sh bison-3.8.2.tar.xz

@@ -2,7 +2,10 @@ set -e
 
 echo "Preparando ${LFS:?}"
 
-chown -R root:root $LFS/{usr,lib,var,etc,bin,sbin,tools,lib64}
+chown -R root:root $LFS/{usr,lib,var,etc,bin,sbin,tools}
+case $(uname -m) in
+  x86_64) chown -R root:root $LFS/lib64 ;;
+esac
 mkdir -pv $LFS/{dev,proc,sys,run}
 
 bash -e $DIST_ROOT/build_scripts/mount-virt.sh
@@ -74,7 +77,7 @@ chroot "$LFS" /usr/bin/env -i   \
 
 bash -e $DIST_ROOT/build_scripts/umount-virt.sh
 
-rm -rf $LFS/sources
+
 cd $LFS
 
 tar -cJpf $DIST_ROOT/dist-temp-tools.txz .

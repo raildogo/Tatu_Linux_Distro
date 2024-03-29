@@ -1,0 +1,30 @@
+patch -Np1 -i ../glibc-2.39-fhs-1.patch
+
+mkdir -v build
+cd       build
+
+echo "rootsbindir=/usr/sbin" > configparms
+
+../configure --prefix=/usr                            \
+             --disable-werror                         \
+             --enable-kernel=4.19                     \
+             --enable-stack-protector=strong          \
+             --disable-nscd                           \
+             libc_cv_slibdir=/usr/lib
+
+make
+
+touch /etc/ld.so.conf
+
+sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
+
+rm -f /usr/sbin/nscd
+
+make DESTDIR=$PWD/dest install
+install -vm755 dest/usr/lib/*.so.* /usr/lib
+
+make install    
+
+sed '/RTLDLIST=/s@/usr@@g' -i /usr/bin/ldd
+
+mkdir -pv /usr/lib/locale
