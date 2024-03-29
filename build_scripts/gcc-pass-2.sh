@@ -1,4 +1,4 @@
-. $DIST_ROOT/build/build_scripts/inc-start.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-start.sh $1 $(basename $0)
 
 tar -xf ../mpfr-4.2.1.tar.xz
 mv -v mpfr-4.2.1 mpfr
@@ -39,4 +39,4 @@ cd       build
 
     ln -sv gcc $LFS/usr/bin/cc
     
-. $DIST_ROOT/build/build_scripts/inc-end.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-end.sh $1 $(basename $0)

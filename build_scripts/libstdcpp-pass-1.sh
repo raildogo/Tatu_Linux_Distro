@@ -1,4 +1,4 @@
-. $DIST_ROOT/build/build_scripts/inc-start.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-start.sh $1 $(basename $0)
  
 mkdir -v build
 cd       build
@@ -17,4 +17,4 @@ make && make DESTDIR=$LFS install
 
 rm -v $LFS/usr/lib/lib{stdc++{,exp,fs},supc++}.la
 
-. $DIST_ROOT/build/build_scripts/inc-end.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-end.sh $1 $(basename $0)

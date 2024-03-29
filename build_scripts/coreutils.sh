@@ -1,4 +1,4 @@
-. $DIST_ROOT/build/build_scripts/inc-start.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-start.sh $1 $(basename $0)
 
 ./configure --prefix=/usr                     \
             --host=$LFS_TGT                   \
@@ -12,4 +12,4 @@ mkdir -pv $LFS/usr/share/man/man8
 mv -v $LFS/usr/share/man/man1/chroot.1 $LFS/usr/share/man/man8/chroot.8
 sed -i 's/"1"/"8"/'                    $LFS/usr/share/man/man8/chroot.8
 
-. $DIST_ROOT/build/build_scripts/inc-end.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-end.sh $1 $(basename $0)

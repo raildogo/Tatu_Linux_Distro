@@ -9,7 +9,7 @@ if ! test $(whoami) == "tatubuild" ; then
 fi
 
 echo "Criando ambiente de compilação..."
-cd $DIST_ROOT/build
+cd $DIST_ROOT/
 
 bash -e build_scripts/binutils-pass-1.sh
 bash -e build_scripts/gcc-pass-1.sh

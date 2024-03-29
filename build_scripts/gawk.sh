@@ -1,4 +1,4 @@
-. $DIST_ROOT/build/build_scripts/inc-start.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-start.sh $1 $(basename $0)
 
 sed -i 's/extras//' Makefile.in
 
@@ -8,4 +8,4 @@ sed -i 's/extras//' Makefile.in
 
 make && make DESTDIR=$LFS install
 
-. $DIST_ROOT/build/build_scripts/inc-end.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-end.sh $1 $(basename $0)

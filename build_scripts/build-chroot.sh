@@ -5,7 +5,7 @@ echo "Preparando ${LFS:?}"
 chown -R root:root $LFS/{usr,lib,var,etc,bin,sbin,tools,lib64}
 mkdir -pv $LFS/{dev,proc,sys,run}
 
-bash -e $DIST_ROOT/build/build_scripts/mount-virt.sh
+bash -e $DIST_ROOT/build_scripts/mount-virt.sh
 
 if ! test -f $LFS/etc/passwd ; then
 
@@ -72,9 +72,9 @@ chroot "$LFS" /usr/bin/env -i   \
     TESTSUITEFLAGS="-j$(nproc)" \
     /dist/build/build_scripts/finalizar-chroot.sh
 
-bash -e $DIST_ROOT/build/build_scripts/umount-virt.sh
+bash -e $DIST_ROOT/build_scripts/umount-virt.sh
 
 rm -rf $LFS/sources
 cd $LFS
 
-tar -cJpf $DIST_ROOT/build/dist-temp-tools.txz .
+tar -cJpf $DIST_ROOT/dist-temp-tools.txz .

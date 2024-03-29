@@ -2,7 +2,7 @@ set -e
 
 echo "Entrando Chroot: ${LFS:?}"
 
-bash -e $DIST_ROOT/build/build_scripts/mount-virt.sh
+bash -e $DIST_ROOT/build_scripts/mount-virt.sh
 
 chroot "$LFS" /usr/bin/env -i   \
     HOME=/root                  \
@@ -13,4 +13,4 @@ chroot "$LFS" /usr/bin/env -i   \
     TESTSUITEFLAGS="-j$(nproc)" \
     /bin/bash --login
 
-    bash -e $DIST_ROOT/build/build_scripts/umount-virt.sh
+    bash -e $DIST_ROOT/build_scripts/umount-virt.sh
