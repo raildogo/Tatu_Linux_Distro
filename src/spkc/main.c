@@ -128,7 +128,7 @@ static struct argp argp = { options, parse_opt, args_doc, doc, 0, 0, 0 };
 int main(int argc, char **argv) {
     spkc_args args = {0};
 
-    printf("LLD OS - Simple Package Creator v 1.0.0\n\n");
+    printf("Tatu OS - Simple Package Creator v 1.0.0\n\n");
 
     argp_parse(&argp, argc, argv, 0, 0, &args);
 

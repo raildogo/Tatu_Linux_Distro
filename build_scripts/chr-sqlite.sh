@@ -1,4 +1,4 @@
-. $DIST_ROOT/build_env/build_scripts/inc-start.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-start.sh $1 $(basename $0)
 
 ./configure --prefix=/usr     \
             --disable-static  \
@@ -12,6 +12,7 @@
             -DSQLITE_SECURE_DELETE=1          \
             -DSQLITE_ENABLE_FTS3_TOKENIZER=1" &&
 make
+
 make install
 
-. $DIST_ROOT/build_env/build_scripts/inc-end.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-end.sh $1 $(basename $0)

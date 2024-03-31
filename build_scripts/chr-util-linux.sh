@@ -16,6 +16,8 @@ mkdir -pv /var/lib/hwclock
             ADJTIME_PATH=/var/lib/hwclock/adjtime \
             --docdir=/usr/share/doc/util-linux-2.39.3
 
-make && make install
+make
+
+make install
 
 . $DIST_ROOT/build_scripts/inc-end.sh $1 $(basename $0)

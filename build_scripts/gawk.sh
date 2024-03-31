@@ -6,6 +6,8 @@ sed -i 's/extras//' Makefile.in
             --host=$LFS_TGT \
             --build=$(build-aux/config.guess)
 
-make && make DESTDIR=$LFS install
+make
+
+make DESTDIR=$LFS install
 
 . $DIST_ROOT/build_scripts/inc-end.sh $1 $(basename $0)

@@ -13,7 +13,9 @@ cd       build
     --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/13.2.0
 
 
-make && make DESTDIR=$LFS install
+make
+
+make DESTDIR=$LFS install
 
 rm -v $LFS/usr/lib/lib{stdc++{,exp,fs},supc++}.la
 

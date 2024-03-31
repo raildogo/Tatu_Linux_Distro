@@ -1,4 +1,4 @@
-. $DIST_ROOT/build/build_scripts/inc-start.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-start.sh $1 $(basename $0)
 
 ./configure --prefix=/usr                     \
             --host=$LFS_TGT                   \
@@ -6,6 +6,10 @@
             --disable-static                  \
             --docdir=/usr/share/doc/xz-5.4.6
 
-make && make DESTDIR=$LFS install && rm -v $LFS/usr/lib/liblzma.la
+make
 
-. $DIST_ROOT/build/build_scripts/inc-end.sh $1 $(basename $0)
+make DESTDIR=$LFS install
+
+rm -v $LFS/usr/lib/liblzma.la
+
+. $DIST_ROOT/build_scripts/inc-end.sh $1 $(basename $0)

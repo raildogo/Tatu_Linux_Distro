@@ -11,7 +11,9 @@ sh Configure -des                                        \
              -Dvendorlib=/usr/lib/perl5/5.38/vendor_perl \
              -Dvendorarch=/usr/lib/perl5/5.38/vendor_perl
 
-make && make install
+make
+
+make install
 
 
 . $DIST_ROOT/build_scripts/inc-end.sh $1 $(basename $0)

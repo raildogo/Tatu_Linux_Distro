@@ -1,4 +1,4 @@
-. $DIST_ROOT/build/build_scripts/inc-start.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-start.sh $1 $(basename $0)
 
 sed -i s/mawk// configure
 
@@ -23,9 +23,12 @@ popd
             --enable-widec
 
 make
+
 make DESTDIR=$LFS TIC_PATH=$(pwd)/build/progs/tic install
+
 ln -sv libncursesw.so $LFS/usr/lib/libncurses.so
+
 sed -e 's/^#if.*XOPEN.*$/#if 1/' \
     -i $LFS/usr/include/curses.h
 
-. $DIST_ROOT/build/build_scripts/inc-end.sh $1 $(basename $0)
+. $DIST_ROOT/build_scripts/inc-end.sh $1 $(basename $0)
